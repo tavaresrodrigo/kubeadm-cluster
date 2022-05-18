@@ -1,11 +1,19 @@
 # Kubernetes Cluster
 
-A 2 instances Kubernetes cluster deployed on AWS with t4g.small. 
+A 2 instances Kubernetes cluster deployed on AWS with t3.small, which is the cheapest X86 option ($0.0228 On-Demand hourly rate) with the minimal requirements (2 GB of RAM and 2 CPUs) stablished by [Kubeadm](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/). 
+
+![Kubernetes Cluster Architecture](/img/KubeadmClusterAWS.drawio.png)
 
 
 # CDK Python project!
 
-This is a blank project for Python development with CDK.
+
+Bedore you proceed you need to configure two environment variables below:
+
+```bash
+$export AWS_ACCESS_KEY_ID=[Your Key pair ID]
+$export AWS_ACCOUNT_ID=[Your AWS account ID]
+```
 
 The `cdk.json` file tells the CDK Toolkit how to execute your app.
 

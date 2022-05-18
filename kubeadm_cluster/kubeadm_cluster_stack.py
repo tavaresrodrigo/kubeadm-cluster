@@ -7,7 +7,7 @@ from aws_cdk import (
 )
 
 vpcID="vpc-98ba0ae1"
-instanceType="t4g.small"
+instanceType="t3.small"
 instanceNames=["k8s-master", "k8s-node1"]
 with open("./kubeadm_cluster/user_data.sh", "r") as f:
     user_data = f.read()
@@ -16,7 +16,8 @@ amzn_linux = ec2.AmazonLinuxImage(
     generation=ec2.AmazonLinuxGeneration.AMAZON_LINUX_2,
     edition=ec2.AmazonLinuxEdition.STANDARD,
     virtualization=ec2.AmazonLinuxVirt.HVM,
-    storage=ec2.AmazonLinuxStorage.GENERAL_PURPOSE
+    storage=ec2.AmazonLinuxStorage.GENERAL_PURPOSE,
+    cpu_type=ec2.AmazonLinuxCpuType.X86_64
 )
 
 from constructs import Construct
