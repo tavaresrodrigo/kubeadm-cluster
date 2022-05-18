@@ -1,5 +1,9 @@
+# Kubernetes Cluster
 
-# Welcome to your CDK Python project!
+A 2 instances Kubernetes cluster deployed on AWS with t4g.small. 
+
+
+# CDK Python project!
 
 This is a blank project for Python development with CDK.
 
