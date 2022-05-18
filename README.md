@@ -2,7 +2,7 @@
 
 A 2 instances Kubernetes cluster deployed on AWS with t3.small, which is the cheapest X86 option ($0.0228 On-Demand hourly rate) with the minimal requirements (2 GB of RAM and 2 CPUs) stablished by [Kubeadm](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/). 
 
-![Kubernetes Cluster Architecture](/img/KubeadmClusterAWS.drawio.png)
+![Kubernetes Cluster Architecture](/img/KubeadmClusterAWS.png)
 
 
 # CDK Python project!
