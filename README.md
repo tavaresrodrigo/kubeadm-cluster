@@ -1,24 +1,24 @@
 # Kubernetes Cluster
 
-A 2 instances Kubernetes cluster deployed on AWS with t3.small, which is the cheapest X86 option ($0.0228 On-Demand hourly rate) with the minimal requirements (2 GB of RAM and 2 CPUs) stablished by [Kubeadm](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/). 
+A two instances Kubernetes cluster deployed on AWS with t3.small, the cheapest X86 option available in eu-west-1 ($0.0228 On-Demand hourly rate) with the minimal requirements (2 GB of RAM and 2 CPUs) established by [Kubeadm](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/). 
 
 ![Kubernetes Cluster Architecture](/img/KubeadmClusterAWS.png)
 
 ## Configuring the Cluster
 
-Currently this CDK stack create the cluster instances and install te required packages, I want to automate cluster Bootstrap in the future but for now we need to do it manually.
+Currently this CDK stack creates the cluster instances and install the required packages, I want to automate cluster Bootstrap in the future but for now we need to do it manually.
 
-1 - Connect to the Master ec2 and initialize the Kubernetes control-plane node. The --pod-network-cidr may change depending on your subnet CIDR. 
+1 - Connect to the Master ec2 and initialise the Kubernetes control-plane node. The --pod-network-cidr may change depending on your subnet CIDR. 
 
 ```bash
 sudo su
 kubeadm init --pod-network-cidr=172.31.32.0/20 --ignore-preflight-errors=NumCPUa
 ```
 
-2 - The Kubernetes control-plane will be initialized and as output we get all the commands necessary to complete the cluster installation and configuraiton process. 
+2 - The Kubernetes control-plane will be initialised and as output we get all the commands necessary to complete the cluster installation and configuration process. 
 
 ```
-Your Kubernetes control-plane has initialized successfully!
+Your Kubernetes control-plane has been initialised successfully!
 
 To start using your cluster, you need to run the following as a regular user:
 
@@ -59,7 +59,7 @@ This node has joined the cluster:
 Run 'kubectl get nodes' on the control-plane to see this node join the cluster.
 ```
 
-4 -  On the master node run the command to get the nodes to confirme whether the cluster is working properly.
+4 -  On the master node, run the command to get the nodes to confirm whether the cluster is working properly.
 
 ```bash
 $ kubectl get nodes
@@ -73,7 +73,7 @@ ip-172-31-44-60.eu-west-1.compute.internal    Ready    control-plane   15m   v1.
 
 To be able to deploy the CDK code and create the resources in AWS, you need to [install and configure the AWS CDK](https://docs.aws.amazon.com/cdk/v2/guide/getting_started.html).
 
-After installing CDK, onfigure two environment variables below:
+After installing CDK, configure two environment variables below:
 
 ```bash
 $export AWS_ACCESS_KEY_ID=[Your Key pair ID]
