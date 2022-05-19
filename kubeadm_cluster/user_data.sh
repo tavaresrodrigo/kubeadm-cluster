@@ -13,13 +13,6 @@ gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg https://packages.cl
 exclude=kube*
 EOF
 
-echo br_netfilter > /etc/modules-load.d/br_netfilter.conf
-systemctl restart systemd-modules-load.service
-echo 1 > /proc/sys/net/bridge/bridge-nf-call-iptables
-echo 1 > /proc/sys/net/bridge/bridge-nf-call-ip6tables
-echo 1 > /proc/sys/net/ipv4/ip_forward
-sysctl --system
-
 sudo setenforce 0
 sudo sed -i 's/^SELINUX=enforcing$/SELINUX=permissive/' /etc/selinux/config
 
@@ -33,6 +26,14 @@ sysctl --system
 
 yum install -y kubelet kubeadm kubectl --disableexcludes=kubernetes
 systemctl enable --now kubelet
+
+echo br_netfilter > /etc/modules-load.d/br_netfilter.conf
+systemctl restart systemd-modules-load.service
+echo 1 > /proc/sys/net/bridge/bridge-nf-call-iptables
+echo 1 > /proc/sys/net/bridge/bridge-nf-call-ip6tables
+echo 1 > /proc/sys/net/ipv4/ip_forward
+sysctl -w net.bridge.bridge-nf-call-iptables=1
+sysctl --system
 
 
 # Master node setup
