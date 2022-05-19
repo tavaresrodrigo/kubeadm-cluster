@@ -24,21 +24,23 @@ systemctl enable --now containerd
 sysctl --system
 
 
-yum install -y kubelet kubeadm kubectl --disableexcludes=kubernetes
+yum install -y kubelet kubeadm kubectl go --disableexcludes=kubernetes
 systemctl enable --now kubelet
 
 echo br_netfilter > /etc/modules-load.d/br_netfilter.conf
 systemctl restart systemd-modules-load.service
-echo 1 > /proc/sys/net/bridge/bridge-nf-call-iptables
-echo 1 > /proc/sys/net/bridge/bridge-nf-call-ip6tables
-echo 1 > /proc/sys/net/ipv4/ip_forward
+sysctl -w net.bridge.bridge-nf-call-iptables=1
+sysctl -w net.ipv4.ip_forward=1
+sysctl -a
 sysctl -w net.bridge.bridge-nf-call-iptables=1
 sysctl --system
+sysctl -a
+sysctl -w net.bridge.bridge-nf-call-iptables=1
 
 
 # Master node setup
 # kubeadm init --pod-network-cidr=172.31.32.0/20 --ignore-preflight-errors=NumCPUa
 # systemctl enable kubelet && systemctl start kubelet
-
+# kubectl apply -f "https://cloud.weave.works/k8s/net?k8s-version=$(kubectl version | base64 | tr -d '\n')"
 
 
