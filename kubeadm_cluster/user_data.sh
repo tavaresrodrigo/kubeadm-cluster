@@ -1,5 +1,6 @@
 #!/bin/sh
 
+# Configuring kubernetes repository
 sudo su
 
 sudo cat <<EOF > /etc/yum.repos.d/kubernetes.repo
@@ -13,20 +14,23 @@ gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg https://packages.cl
 exclude=kube*
 EOF
 
+# Desabling SElinux
 sudo setenforce 0
 sudo sed -i 's/^SELINUX=enforcing$/SELINUX=permissive/' /etc/selinux/config
 
-
+#Installing container engine tools
 yum update -y
 amazon-linux-extras enable docker
 yum install -y containerd iproute-tc
 systemctl enable --now containerd
 sysctl --system
 
-
-yum install -y kubelet kubeadm kubectl go --disableexcludes=kubernetes
+#Installing kubelet and kubeadm
+yum install -y kubelet kubeadm kubectl --disableexcludes=kubernetes
+yum remove -y go
 systemctl enable --now kubelet
 
+#Configuring kernel parameters
 echo br_netfilter > /etc/modules-load.d/br_netfilter.conf
 systemctl restart systemd-modules-load.service
 sysctl -w net.bridge.bridge-nf-call-iptables=1
@@ -37,6 +41,13 @@ sysctl --system
 sysctl -a
 sysctl -w net.bridge.bridge-nf-call-iptables=1
 
+# Installing go 18
+
+wget https://storage.googleapis.com/golang/getgo/installer_linux
+chmod +x ./installer_linux
+./installer_linux 
+source ~/.bash_profile
+exit
 
 # Master node setup
 # kubeadm init --pod-network-cidr=172.31.32.0/20 --ignore-preflight-errors=NumCPUa
