@@ -4,7 +4,7 @@ A two instances Kubernetes cluster deployed on AWS with t3.small, the cheapest X
 
 ![Kubernetes Cluster Architecture](/diagrams/KubeadmClusterAWS.jpg)
 
-* This diagram was draw using [app.diagrams.net](https://app.diagrams.net/), the diagram file is available on XML compressed standard deflate on [diagrams/KubeadmClusterAWS](/diagrams/KubeadmClusterAWS.png). The raw XML may be useful to see how the diagram is constructed and you can decode it folowing the steps on https://drawio-app.com/extracting-the-xml-from-mxfiles/.
+* This diagram was drawn using [app.diagrams.net](https://app.diagrams.net/), and is available on XML compressed standard deflate format on [diagrams/KubeadmClusterAWS](/diagrams/KubeadmClusterAWS.png). Refer to https://drawio-app.com/extracting-the-xml-from-mxfiles/ if you want to get the raw XML.
 
 
 
