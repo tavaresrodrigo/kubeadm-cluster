@@ -1,8 +1,8 @@
-# Kubernetes Cluster
+# Kubernetes Cluster with kubeadm on AWS
 
 A two instances Kubernetes cluster deployed on AWS with t3.small, the cheapest X86 option available in eu-west-1 ($0.0228 On-Demand hourly rate) with the minimal requirements (2 GB of RAM and 2 CPUs) established by [Kubeadm](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/). 
 
-![Kubernetes Cluster Architecture](/diagrams/KubeadmClusterAWS.png)
+![Kubernetes Cluster Architecture](/diagrams/KubeadmClusterAWS.jpg)
 
 * This diagram was draw using [app.diagrams.net](https://app.diagrams.net/), the diagram file is available on XML compressed standard deflate on [diagrams/KubeadmClusterAWS](/diagrams/KubeadmClusterAWS.png). The raw XML may be useful to see how the diagram is constructed and you can decode it folowing the steps on https://drawio-app.com/extracting-the-xml-from-mxfiles/.
 
