@@ -31,7 +31,8 @@ class KubeadmClusterStack(Stack):
         sec_group = ec2.SecurityGroup(self, "k8s-sg", vpc=vpc, allow_all_outbound=True)
 
         # Defining ingress rules for the security group
-        sec_group.add_ingress_rule(ec2.Peer.any_ipv4(), ec2.Port.tcp(22), "SSH from the internet")
+        sec_group.add_ingress_rule(ec2.Peer.any_ipv4(), ec2.Port.tcp(22), "SSH from the internet.")
+        sec_group.add_ingress_rule(ec2.Peer.any_ipv4(), ec2.Port.tcp(6443), "Kubernetes API.")
 
         # Defining the master instance
         master_node =  ec2.Instance(
