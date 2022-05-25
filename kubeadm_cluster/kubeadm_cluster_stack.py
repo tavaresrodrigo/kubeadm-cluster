@@ -6,9 +6,20 @@ from aws_cdk import (
 
 )
 
+# Check if the environament variables are set
+try:
+    key_name=os.environ.get('AWS_ACCESS_KEY_ID')
+    secret_key=os.environ.get('AWS_SECRET_ACCESS_KEY')
+except (KeyError, ValueError):
+    print("Please set AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY environment variables")
+    exit(1)
+
+# Define stack properties
 vpcID="vpc-98ba0ae1"
 instanceType="t3.small"
 instanceNames=["k8s-master", "k8s-node1"]
+
+# Define user data
 with open("./kubeadm_cluster/user_data.sh", "r") as f:
     user_data = f.read()
 
@@ -32,7 +43,7 @@ class KubeadmClusterStack(Stack):
 
         # Defining ingress rules for the security group
         sec_group.add_ingress_rule(ec2.Peer.any_ipv4(), ec2.Port.tcp(22), "SSH from the internet.")
-        sec_group.add_ingress_rule(ec2.Peer.any_ipv4(), ec2.Port.tcp(6443), "Kubernetes API.")
+        sec_group.add_ingress_rule(sec_group, ec2.Port.all_tcp(), "Kubernetes API.")
 
         # Defining the master instance
         master_node =  ec2.Instance(
@@ -44,7 +55,8 @@ class KubeadmClusterStack(Stack):
             vpc=vpc,
             security_group=sec_group,
             user_data=ec2.UserData.custom(user_data), 
-            key_name=os.environ.get('AWS_ACCESS_KEY_ID'),
+            key_name=os.environ.get('AWS_ACCESS_KEY_ID')
+       
         )
 
         # Defining the node instances
