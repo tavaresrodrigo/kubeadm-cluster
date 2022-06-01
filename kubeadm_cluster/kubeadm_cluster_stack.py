@@ -8,10 +8,10 @@ from aws_cdk import (
 
 # Check if the environament variables are set
 try:
-    key_name=os.environ.get('AWS_ACCESS_KEY_ID')
-    secret_key=os.environ.get('AWS_SECRET_ACCESS_KEY')
+    key_id=os.environ.get('MY_KEY_ID')
+    account_id=os.environ.get('MY_ACCOUNT_ID')
 except (KeyError, ValueError):
-    print("Please set AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY environment variables")
+    print("Please set AWS_ACCESS_KEY_ID and MY_ACCOUNT_ID environment variables")
     exit(1)
 
 # Define stack properties
