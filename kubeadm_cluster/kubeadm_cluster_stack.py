@@ -45,7 +45,7 @@ class KubeadmClusterStack(Stack):
         sec_group.add_ingress_rule(ec2.Peer.any_ipv4(), ec2.Port.tcp(22), "SSH from the internet.")
         sec_group.add_ingress_rule(sec_group, ec2.Port.all_tcp(), "Kubernetes API.")
 
-        # Defining the master instance
+        # Defining the control plane instance
         master_node =  ec2.Instance(
             self,
             "Master",
